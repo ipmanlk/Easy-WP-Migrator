@@ -1,69 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data;
 using MySql.Data.MySqlClient;
 
 namespace WPMigrator
 {
     public class DBConnection
     {
-        private DBConnection()
-        {
-        }
 
+        private MySqlConnection connection = null;
         private string databaseName = string.Empty;
         private string databaseHost = string.Empty;
         private string databaseUser = string.Empty;
         private string databasePass = string.Empty;
+        private int databasePort;
 
-        public string DatabaseName
+        // Private constructor to create a database connection instance
+        public DBConnection(string databaseName, string databaseUser, string databasePass, string databaseHost, int databasePort)
         {
-            get { return databaseName; }
-            set { databaseName = value; }
+            this.databaseName = databaseName;
+            this.databaseHost = databaseHost;
+            this.databaseUser = databaseUser;
+            this.databasePass = databasePass;
+            this.databasePort = databasePort;
         }
 
-        public string DatabaseHost
-        {
-            get { return databaseHost; }
-            set { databaseHost = value; }
-        }
 
-        public string DatabaseUser
-        {
-            get { return databaseUser; }
-            set { databaseUser = value; }
-        }
-
-        public string DatabasePass
-        {
-            get { return databasePass; }
-            set { databasePass = value; }
-        }
-
-        private MySqlConnection connection = null;
-        public MySqlConnection Connection
+        public MySqlConnection GetConnection
         {
             get { return connection; }
         }
 
-        private static DBConnection _instance = null;
-        public static DBConnection Instance()
-        {
-            if (_instance == null)
-                _instance = new DBConnection();
-            return _instance;
-        }
-
         public bool IsConnect()
         {
-            if (Connection == null)
+            if (connection == null)
             {
                 if (String.IsNullOrEmpty(databaseName))
                     return false;
-                string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}", databaseHost, databaseName, databaseUser, databasePass);
+                string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}; port={4}", databaseHost, databaseName, databaseUser, databasePass, databasePort);
                 connection = new MySqlConnection(connstring);
                 connection.Open();
             }
@@ -71,7 +43,7 @@ namespace WPMigrator
             return true;
         }
 
-        public void Close()
+        public void CloseConnection()
         {
             connection.Close();
         }
