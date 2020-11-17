@@ -29,25 +29,30 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnSetWpDir = new System.Windows.Forms.Button();
+            this.txtWpDir = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnConnectionTest = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnSetMysqlDir = new System.Windows.Forms.Button();
+            this.txtMysqlDir = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listWpTables = new System.Windows.Forms.ListBox();
+            this.btnTestConnection = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.btnSetOutputDir = new System.Windows.Forms.Button();
+            this.txtOutputDir = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnStartMigration = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -56,189 +61,236 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.btnSetWpDir);
+            this.groupBox1.Controls.Add(this.txtWpDir);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btnConnectionTest);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.btnSetMysqlDir);
+            this.groupBox1.Controls.Add(this.txtMysqlDir);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.btnTestConnection);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(658, 237);
+            this.groupBox1.Size = new System.Drawing.Size(569, 222);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Step 1: MySQL Database Configuration";
+            this.groupBox1.Text = "Step 1: Wordpress and MySQL Details";
             // 
-            // groupBox2
+            // btnSetWpDir
             // 
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(361, 26);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(279, 182);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Database Preview";
+            this.btnSetWpDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetWpDir.Location = new System.Drawing.Point(252, 61);
+            this.btnSetWpDir.Name = "btnSetWpDir";
+            this.btnSetWpDir.Size = new System.Drawing.Size(71, 23);
+            this.btnSetWpDir.TabIndex = 19;
+            this.btnSetWpDir.Text = "Set";
+            this.btnSetWpDir.UseVisualStyleBackColor = true;
+            this.btnSetWpDir.Click += new System.EventHandler(this.btnSetWpDir_Click);
             // 
-            // listBox1
+            // txtWpDir
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 16);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(273, 163);
-            this.listBox1.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(104, 143);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(192, 20);
-            this.textBox1.TabIndex = 10;
+            this.txtWpDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWpDir.Location = new System.Drawing.Point(30, 63);
+            this.txtWpDir.Name = "txtWpDir";
+            this.txtWpDir.ReadOnly = true;
+            this.txtWpDir.Size = new System.Drawing.Size(216, 20);
+            this.txtWpDir.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(32, 146);
+            this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Host:";
+            this.label1.Size = new System.Drawing.Size(148, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Wordpress Website Directory:";
             // 
-            // btnConnectionTest
+            // btnSetMysqlDir
             // 
-            this.btnConnectionTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnectionTest.Location = new System.Drawing.Point(35, 185);
-            this.btnConnectionTest.Name = "btnConnectionTest";
-            this.btnConnectionTest.Size = new System.Drawing.Size(261, 23);
-            this.btnConnectionTest.TabIndex = 8;
-            this.btnConnectionTest.Text = "Test Connection";
-            this.btnConnectionTest.UseVisualStyleBackColor = true;
-            this.btnConnectionTest.Click += new System.EventHandler(this.btnConnectionTest_Click);
+            this.btnSetMysqlDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetMysqlDir.Location = new System.Drawing.Point(252, 124);
+            this.btnSetMysqlDir.Name = "btnSetMysqlDir";
+            this.btnSetMysqlDir.Size = new System.Drawing.Size(71, 23);
+            this.btnSetMysqlDir.TabIndex = 16;
+            this.btnSetMysqlDir.Text = "Set";
+            this.btnSetMysqlDir.UseVisualStyleBackColor = true;
+            this.btnSetMysqlDir.Click += new System.EventHandler(this.btnSetMysqlPath_Click);
             // 
-            // textBox4
+            // txtMysqlDir
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(104, 110);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(192, 20);
-            this.textBox4.TabIndex = 7;
+            this.txtMysqlDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMysqlDir.Location = new System.Drawing.Point(30, 124);
+            this.txtMysqlDir.Name = "txtMysqlDir";
+            this.txtMysqlDir.ReadOnly = true;
+            this.txtMysqlDir.Size = new System.Drawing.Size(216, 20);
+            this.txtMysqlDir.TabIndex = 15;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(27, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "MySQL Path:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.listWpTables);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(346, 41);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(198, 155);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Database Tables";
+            // 
+            // listWpTables
+            // 
+            this.listWpTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listWpTables.FormattingEnabled = true;
+            this.listWpTables.Location = new System.Drawing.Point(3, 16);
+            this.listWpTables.Name = "listWpTables";
+            this.listWpTables.Size = new System.Drawing.Size(192, 136);
+            this.listWpTables.TabIndex = 0;
+            // 
+            // btnTestConnection
+            // 
+            this.btnTestConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestConnection.Location = new System.Drawing.Point(30, 173);
+            this.btnTestConnection.Name = "btnTestConnection";
+            this.btnTestConnection.Size = new System.Drawing.Size(293, 23);
+            this.btnTestConnection.TabIndex = 8;
+            this.btnTestConnection.Text = "Test Connection";
+            this.btnTestConnection.UseVisualStyleBackColor = true;
+            this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.textBox6);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(12, 243);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(569, 162);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Step 2: WebHost Details";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(104, 77);
+            this.textBox3.Location = new System.Drawing.Point(115, 118);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(192, 20);
-            this.textBox3.TabIndex = 6;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(104, 44);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(192, 20);
-            this.textBox2.TabIndex = 5;
+            this.textBox3.Size = new System.Drawing.Size(429, 20);
+            this.textBox3.TabIndex = 21;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(32, 113);
+            this.label4.Location = new System.Drawing.Point(32, 121);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Password:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label4.Size = new System.Drawing.Size(71, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "MySQL Pass:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(115, 89);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(429, 20);
+            this.textBox2.TabIndex = 19;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(32, 80);
+            this.label3.Location = new System.Drawing.Point(32, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "User:";
+            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "MySQL User:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(115, 60);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(429, 20);
+            this.textBox1.TabIndex = 17;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(32, 47);
+            this.label2.Location = new System.Drawing.Point(32, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Name:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox6);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 264);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(658, 85);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Step 2: WebHost Details";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "MySQL Host:";
             // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(104, 36);
+            this.textBox6.Location = new System.Drawing.Point(115, 31);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(533, 20);
+            this.textBox6.Size = new System.Drawing.Size(429, 20);
             this.textBox6.TabIndex = 15;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(32, 39);
+            this.label6.Location = new System.Drawing.Point(32, 34);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Domain:";
+            this.label6.Text = "Domain Name:";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Controls.Add(this.textBox7);
+            this.groupBox4.Controls.Add(this.btnSetOutputDir);
+            this.groupBox4.Controls.Add(this.txtOutputDir);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(12, 365);
+            this.groupBox4.Location = new System.Drawing.Point(12, 421);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(658, 85);
+            this.groupBox4.Size = new System.Drawing.Size(569, 85);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Step 3: Output Configuration";
             // 
-            // button2
+            // btnSetOutputDir
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(491, 34);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(146, 23);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Browse";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSetOutputDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetOutputDir.Location = new System.Drawing.Point(453, 34);
+            this.btnSetOutputDir.Name = "btnSetOutputDir";
+            this.btnSetOutputDir.Size = new System.Drawing.Size(91, 23);
+            this.btnSetOutputDir.TabIndex = 14;
+            this.btnSetOutputDir.Text = "Browse";
+            this.btnSetOutputDir.UseVisualStyleBackColor = true;
+            this.btnSetOutputDir.Click += new System.EventHandler(this.btnSetOutputDir_Click);
             // 
-            // textBox7
+            // txtOutputDir
             // 
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(104, 36);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(381, 20);
-            this.textBox7.TabIndex = 15;
+            this.txtOutputDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOutputDir.Location = new System.Drawing.Point(104, 36);
+            this.txtOutputDir.Name = "txtOutputDir";
+            this.txtOutputDir.ReadOnly = true;
+            this.txtOutputDir.Size = new System.Drawing.Size(325, 20);
+            this.txtOutputDir.TabIndex = 15;
             // 
             // label7
             // 
@@ -250,21 +302,21 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Output Path:";
             // 
-            // button3
+            // btnStartMigration
             // 
-            this.button3.Location = new System.Drawing.Point(409, 464);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(261, 44);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Start Migration";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnStartMigration.Location = new System.Drawing.Point(419, 519);
+            this.btnStartMigration.Name = "btnStartMigration";
+            this.btnStartMigration.Size = new System.Drawing.Size(162, 32);
+            this.btnStartMigration.TabIndex = 14;
+            this.btnStartMigration.Text = "Start Migration";
+            this.btnStartMigration.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 516);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(601, 563);
+            this.Controls.Add(this.btnStartMigration);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -284,25 +336,30 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnConnectionTest;
+        private System.Windows.Forms.Button btnTestConnection;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Button btnSetOutputDir;
+        private System.Windows.Forms.TextBox txtOutputDir;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnStartMigration;
+        private System.Windows.Forms.Button btnSetMysqlDir;
+        private System.Windows.Forms.TextBox txtMysqlDir;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox listWpTables;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtWpDir;
+        private System.Windows.Forms.Button btnSetWpDir;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }
 

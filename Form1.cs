@@ -1,11 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace WPMigrator
@@ -17,27 +12,73 @@ namespace WPMigrator
             InitializeComponent();
         }
 
-        private void btnConnectionTest_Click(object sender, EventArgs e)
+
+        private void btnSetMysqlPath_Click(object sender, EventArgs e)
         {
-            var dbCon = new DBConnection("wordpress", "root", "", "localhost", 3306);
+
+            /*        DialogResult result = folderBrowserDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        txtMysqlDir.Text = folderBrowserDialog.SelectedPath;
+                    }*/
+
+            var dbCon = DBConnection.Instance();
+            MysqlTools.cloneDb(dbCon, @"G:\Program Files\xampp\mysql");
+
+        }
+
+        private void btnTestConnection_Click(object sender, EventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseHost = "localhost";
+            dbCon.DatabaseUser = "root";
+            dbCon.DatabasePass = "";
+            dbCon.DatabaseName = "wordpress";
+            dbCon.DatabasePort = 3306;
 
             if (dbCon.IsConnect())
             {
                 //suppose col0 and col1 are defined as VARCHAR in the DB
-                string query = "SELECT post_author, post_date FROM wp_posts";
-                var cmd = new MySqlCommand(query, dbCon.GetConnection);
+                string query = "SHOW TABLES;";
+                var cmd = new MySqlCommand(query, dbCon.GetConnection());
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+
                     string someStringFromColumnZero = reader.GetString(0);
-                    string someStringFromColumnOne = reader.GetString(1);
-                    Console.WriteLine(someStringFromColumnZero + "," + someStringFromColumnOne);
+                    listWpTables.Items.Add(someStringFromColumnZero);
+                    Console.WriteLine(someStringFromColumnZero);
                 }
-                dbCon.CloseConnection();
-            } else
+                reader.Close();
+            }
+            else
             {
                 System.Diagnostics.Trace.WriteLine("MySQL Connection Error");
             }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSetWpDir_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtWpDir.Text = folderBrowserDialog.SelectedPath;
+            }
+        }
+
+        private void btnSetOutputDir_Click(object sender, EventArgs e)
+        {
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtOutputDir.Text = folderBrowserDialog.SelectedPath;
+            }
+
         }
     }
 }

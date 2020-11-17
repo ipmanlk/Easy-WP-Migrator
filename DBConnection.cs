@@ -7,35 +7,40 @@ namespace WPMigrator
     {
 
         private MySqlConnection connection = null;
-        private string databaseName = string.Empty;
-        private string databaseHost = string.Empty;
-        private string databaseUser = string.Empty;
-        private string databasePass = string.Empty;
-        private int databasePort;
+        public string DatabaseName { get; set; }
+        public string DatabaseHost { get; set; }
+        public string DatabaseUser { get; set; }
+        public int DatabasePort { get; set; }
+        public string DatabasePass { get; set; }
 
-        // Private constructor to create a database connection instance
-        public DBConnection(string databaseName, string databaseUser, string databasePass, string databaseHost, int databasePort)
+
+        // private constructor to create a database connection instance
+        private DBConnection()
         {
-            this.databaseName = databaseName;
-            this.databaseHost = databaseHost;
-            this.databaseUser = databaseUser;
-            this.databasePass = databasePass;
-            this.databasePort = databasePort;
+  
         }
 
-
-        public MySqlConnection GetConnection
+        // avoid creating multiple instances
+        private static DBConnection _instance = null;
+        public static DBConnection Instance()
         {
-            get { return connection; }
+            if (_instance == null)
+                _instance = new DBConnection();
+            return _instance;
+        }
+
+        public MySqlConnection GetConnection()
+        {
+            return connection;
         }
 
         public bool IsConnect()
         {
             if (connection == null)
             {
-                if (String.IsNullOrEmpty(databaseName))
+                if (String.IsNullOrEmpty(DatabaseName))
                     return false;
-                string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}; port={4}", databaseHost, databaseName, databaseUser, databasePass, databasePort);
+                string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}; port={4}", DatabaseHost, DatabaseName, DatabaseUser, DatabasePass, DatabasePort);
                 connection = new MySqlConnection(connstring);
                 connection.Open();
             }
