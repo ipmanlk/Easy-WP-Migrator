@@ -310,6 +310,7 @@
             this.btnStartMigration.TabIndex = 14;
             this.btnStartMigration.Text = "Start Migration";
             this.btnStartMigration.UseVisualStyleBackColor = true;
+            this.btnStartMigration.Click += new System.EventHandler(this.btnStartMigration_Click);
             // 
             // Form1
             // 

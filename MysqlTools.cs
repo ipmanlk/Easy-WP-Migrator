@@ -69,8 +69,9 @@ namespace WPMigrator
                    mysqlDumpExe, dbCon.DatabaseHost, dbCon.DatabasePort, dbCon.DatabaseUser, dbCon.DatabasePass, dbCon.DatabaseName, mysqlExe,
                    dbCon.DatabaseHost, dbCon.DatabasePort, dbCon.DatabaseUser, dbCon.DatabasePass, cloneDbName);
 
-                psi.Arguments = "/C " + args;
+                psi.Arguments = "/C " + "\"" + args + "\"";
                 psi.UseShellExecute = false;
+
 
                 Process process = Process.Start(psi);
                 process.WaitForExit();

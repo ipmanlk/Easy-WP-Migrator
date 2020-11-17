@@ -24,7 +24,6 @@ namespace WPMigrator
 
             var dbCon = DBConnection.Instance();
             MysqlTools.cloneDb(dbCon, @"G:\Program Files\xampp\mysql");
-
         }
 
         private void btnTestConnection_Click(object sender, EventArgs e)
@@ -79,6 +78,11 @@ namespace WPMigrator
                 txtOutputDir.Text = folderBrowserDialog.SelectedPath;
             }
 
+        }
+
+        private void btnStartMigration_Click(object sender, EventArgs e)
+        {
+            WpTools.getWpSettings(@"G:\Program Files\xampp\htdocs\wordpress");
         }
     }
 }
