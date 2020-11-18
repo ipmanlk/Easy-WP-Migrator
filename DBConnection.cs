@@ -20,7 +20,7 @@ namespace WPMigrator
   
         }
 
-        // avoid creating multiple instances
+        // always maintain only one instance
         private static DBConnection _instance = null;
         public static DBConnection Instance()
         {
@@ -36,21 +36,18 @@ namespace WPMigrator
 
         public bool IsConnect()
         {
-            if (connection == null)
-            {
-                if (String.IsNullOrEmpty(DatabaseName))
-                    return false;
-                string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}; port={4}", DatabaseHost, DatabaseName, DatabaseUser, DatabasePass, DatabasePort);
-                connection = new MySqlConnection(connstring);
-                connection.Open();
-            }
-
+            if (String.IsNullOrEmpty(DatabaseName))
+                return false;
+            string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}; port={4}", DatabaseHost, DatabaseName, DatabaseUser, DatabasePass, DatabasePort);
+            connection = new MySqlConnection(connstring);
+            connection.Open();
             return true;
         }
 
         public void CloseConnection()
         {
             connection.Close();
+            connection = null;
         }
     }
 }

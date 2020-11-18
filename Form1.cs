@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace WPMigrator
@@ -16,43 +16,21 @@ namespace WPMigrator
         private void btnSetMysqlPath_Click(object sender, EventArgs e)
         {
 
-            /*        DialogResult result = folderBrowserDialog.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        txtMysqlDir.Text = folderBrowserDialog.SelectedPath;
-                    }*/
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtMysqlDir.Text = folderBrowserDialog.SelectedPath;
+            }
 
-            var dbCon = DBConnection.Instance();
-            MysqlTools.cloneDb(dbCon, @"G:\Program Files\xampp\mysql");
+/*            var dbCon = DBConnection.Instance();
+            MysqlTools.cloneDb(dbCon, @"G:\Program Files\xampp\mysql");*/
         }
 
         private void btnTestConnection_Click(object sender, EventArgs e)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseHost = "localhost";
-            dbCon.DatabaseUser = "root";
-            dbCon.DatabasePass = "";
-            dbCon.DatabaseName = "wordpress";
-            dbCon.DatabasePort = 3306;
-
-            if (dbCon.IsConnect())
+            if (!testWpDbConnection())
             {
-                //suppose col0 and col1 are defined as VARCHAR in the DB
-                string query = "SHOW TABLES;";
-                var cmd = new MySqlCommand(query, dbCon.GetConnection());
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-
-                    string someStringFromColumnZero = reader.GetString(0);
-                    listWpTables.Items.Add(someStringFromColumnZero);
-                    Console.WriteLine(someStringFromColumnZero);
-                }
-                reader.Close();
-            }
-            else
-            {
-                System.Diagnostics.Trace.WriteLine("MySQL Connection Error");
+                MessageBox.Show("Unable to contact the MySQL server. Please start it first!.", "Sorry!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -67,6 +45,12 @@ namespace WPMigrator
             if (result == DialogResult.OK)
             {
                 txtWpDir.Text = folderBrowserDialog.SelectedPath;
+
+                // after path is selected, try pharsing the config and making the db connection
+               if (!testWpDbConnection())
+                {
+                    MessageBox.Show("Unable to contact the MySQL server. Please start it first!.", "Sorry!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -82,7 +66,99 @@ namespace WPMigrator
 
         private void btnStartMigration_Click(object sender, EventArgs e)
         {
-            WpTools.getWpSettings(@"G:\Program Files\xampp\htdocs\wordpress");
+
+            // TODO: Validation
+
+            // 1: Create a clone of the existing database
+            var dbCon = DBConnection.Instance();
+            MysqlTools.cloneDb(dbCon, txtMysqlDir.Text);
+
+            // 2: Update existing values
+            string clonedDbName = "wpmclone_" + dbCon.DatabaseName;
+
+            // parse
+            Dictionary<string, string> wpConfig = WpTools.parseWpConfig(txtWpDir.Text);
+
+            // close existing connection first
+            dbCon.CloseConnection();
+
+            // make new connection to the cloned db
+            dbCon.DatabaseHost = wpConfig["DB_HOST"];
+            dbCon.DatabaseUser = wpConfig["DB_USER"];
+            dbCon.DatabasePass = wpConfig["DB_PASSWORD"];
+            dbCon.DatabaseName = clonedDbName;
+            dbCon.DatabasePort = 3306;
+
+            if (dbCon.IsConnect())
+            {
+                // get wp options
+                Dictionary<string, string> wpOptions = WpTools.getWpOptions(dbCon);
+
+                // replace site url in otpions
+                MySqlConnection conn = dbCon.GetConnection();
+                
+                string query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='siteurl'", txtWhDomain.Text);
+                MySqlCommand mysqlCommand = new MySqlCommand(query, conn);
+                mysqlCommand.ExecuteNonQuery();
+
+                query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='home'", txtWhDomain.Text);
+                mysqlCommand = new MySqlCommand(query, conn);
+                mysqlCommand.ExecuteNonQuery();
+
+                // replace urls in posts (image urls, videos, etc)
+                query = String.Format("UPDATE wp_posts SET post_content = REPLACE(post_content, '{0}', '{1}')", wpOptions["siteurl"], txtWhDomain.Text);
+                Console.WriteLine(query);
+                mysqlCommand = new MySqlCommand(query, conn);
+                mysqlCommand.ExecuteNonQuery();
+            }
+   
+        }
+
+        private Boolean testWpDbConnection()
+        {
+
+            try
+            {
+                // parse
+                Dictionary<string, string> wpConfig = WpTools.parseWpConfig(txtWpDir.Text);
+
+                // make db connection
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseHost = wpConfig["DB_HOST"];
+                dbCon.DatabaseUser = wpConfig["DB_USER"];
+                dbCon.DatabasePass = wpConfig["DB_PASSWORD"];
+                dbCon.DatabaseName = wpConfig["DB_NAME"];
+                dbCon.DatabasePort = 3306;
+
+                if (dbCon.IsConnect())
+                {
+                    string query = "SHOW TABLES;";
+                    var cmd = new MySqlCommand(query, dbCon.GetConnection());
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+
+                        string someStringFromColumnZero = reader.GetString(0);
+                        listWpTables.Items.Add(someStringFromColumnZero);
+                    }
+                    reader.Close();
+                }
+                else
+                {
+                    System.Diagnostics.Trace.WriteLine("MySQL Connection Error");
+                    return false;
+                }
+
+                return true;
+
+            } catch (Exception e)
+            {
+                System.Diagnostics.Trace.WriteLine(e.Message);
+                return false;
+            }
+
+
+   
         }
     }
 }

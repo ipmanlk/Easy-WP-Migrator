@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -35,6 +37,27 @@ namespace WPMigrator
             }
 
             return wpConfig;
+        }
+    
+        public static Dictionary<string, string> getWpOptions(DBConnection dbCon)
+        {
+            // store options in a dictionary
+            Dictionary<string, string> wpOptions = new Dictionary<string, string>();
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM wp_options";
+                var cmd = new MySqlCommand(query, dbCon.GetConnection());
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    wpOptions.Add(reader.GetString(1), reader.GetString(2));
+                }
+                reader.Close();
+            }
+
+            return wpOptions;
         }
     }
 }
