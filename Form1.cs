@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WPMigrator
 {
@@ -22,8 +23,6 @@ namespace WPMigrator
                 txtMysqlDir.Text = folderBrowserDialog.SelectedPath;
             }
 
-/*            var dbCon = DBConnection.Instance();
-            MysqlTools.cloneDb(dbCon, @"G:\Program Files\xampp\mysql");*/
         }
 
         private void btnTestConnection_Click(object sender, EventArgs e)
@@ -67,51 +66,70 @@ namespace WPMigrator
         private void btnStartMigration_Click(object sender, EventArgs e)
         {
 
-            // TODO: Validation
+            /*          // TODO: Validation
 
-            // 1: Create a clone of the existing database
-            var dbCon = DBConnection.Instance();
-            MysqlTools.cloneDb(dbCon, txtMysqlDir.Text);
+                      // 1: Create a clone of the existing database
+                      var dbCon = DBConnection.Instance();
+                      MysqlTools.cloneDb(dbCon, txtMysqlDir.Text);
 
-            // 2: Update existing values
-            string clonedDbName = "wpmclone_" + dbCon.DatabaseName;
+                      // 2: Update existing values
+                      string clonedDbName = "wpmclone_" + dbCon.DatabaseName;
 
-            // parse
-            Dictionary<string, string> wpConfig = WpTools.parseWpConfig(txtWpDir.Text);
+                      // parse
+                      Dictionary<string, string> wpConfig = WpTools.parseWpConfig(txtWpDir.Text);
 
-            // close existing connection first
-            dbCon.CloseConnection();
+                      // close existing connection first
+                      dbCon.CloseConnection();
 
-            // make new connection to the cloned db
-            dbCon.DatabaseHost = wpConfig["DB_HOST"];
-            dbCon.DatabaseUser = wpConfig["DB_USER"];
-            dbCon.DatabasePass = wpConfig["DB_PASSWORD"];
-            dbCon.DatabaseName = clonedDbName;
-            dbCon.DatabasePort = 3306;
+                      // make new connection to the cloned db
+                      dbCon.DatabaseHost = wpConfig["DB_HOST"];
+                      dbCon.DatabaseUser = wpConfig["DB_USER"];
+                      dbCon.DatabasePass = wpConfig["DB_PASSWORD"];
+                      dbCon.DatabaseName = clonedDbName;
+                      dbCon.DatabasePort = 3306;
 
-            if (dbCon.IsConnect())
+                      if (dbCon.IsConnect())
+                      {
+                          // get wp options
+                          Dictionary<string, string> wpOptions = WpTools.getWpOptions(dbCon);
+
+                          // replace site url in otpions
+                          MySqlConnection conn = dbCon.GetConnection();
+
+                          string query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='siteurl'", txtWhDomain.Text);
+                          MySqlCommand mysqlCommand = new MySqlCommand(query, conn);
+                          mysqlCommand.ExecuteNonQuery();
+
+                          query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='home'", txtWhDomain.Text);
+                          mysqlCommand = new MySqlCommand(query, conn);
+                          mysqlCommand.ExecuteNonQuery();
+
+                          // replace urls in posts (image urls, videos, etc)
+                          query = String.Format("UPDATE wp_posts SET post_content = REPLACE(post_content, '{0}', '{1}')", wpOptions["siteurl"], txtWhDomain.Text);
+                          Console.WriteLine(query);
+                          mysqlCommand = new MySqlCommand(query, conn);
+                          mysqlCommand.ExecuteNonQuery();
+                      }*/
+
+            // 3: Create directory structure for output
+            string outputDir = txtOutputDir.Text + @"\WPMigrator-Output";
+            string outputWpDir = outputDir + @"\public";
+            string outputMysqlDir = outputDir + @"\database";
+
+            // delete if exists
+            if (Directory.Exists(outputDir))
             {
-                // get wp options
-                Dictionary<string, string> wpOptions = WpTools.getWpOptions(dbCon);
-
-                // replace site url in otpions
-                MySqlConnection conn = dbCon.GetConnection();
-                
-                string query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='siteurl'", txtWhDomain.Text);
-                MySqlCommand mysqlCommand = new MySqlCommand(query, conn);
-                mysqlCommand.ExecuteNonQuery();
-
-                query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='home'", txtWhDomain.Text);
-                mysqlCommand = new MySqlCommand(query, conn);
-                mysqlCommand.ExecuteNonQuery();
-
-                // replace urls in posts (image urls, videos, etc)
-                query = String.Format("UPDATE wp_posts SET post_content = REPLACE(post_content, '{0}', '{1}')", wpOptions["siteurl"], txtWhDomain.Text);
-                Console.WriteLine(query);
-                mysqlCommand = new MySqlCommand(query, conn);
-                mysqlCommand.ExecuteNonQuery();
+                var dir = new DirectoryInfo(outputDir);
+                dir.Delete(true);
             }
-   
+
+            Directory.CreateDirectory(outputDir);
+            Directory.CreateDirectory(outputWpDir);
+            Directory.CreateDirectory(outputMysqlDir);
+
+
+            // 4: Copy wordpress files from given dir to output dir
+            FileTools.Copy(txtWpDir.Text, outputWpDir);
         }
 
         private Boolean testWpDbConnection()

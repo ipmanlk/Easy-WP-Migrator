@@ -297,6 +297,7 @@
             this.txtOutputDir.ReadOnly = true;
             this.txtOutputDir.Size = new System.Drawing.Size(361, 20);
             this.txtOutputDir.TabIndex = 15;
+            this.txtOutputDir.Text = "C:\\Users\\ipman\\Desktop";
             // 
             // label7
             // 
