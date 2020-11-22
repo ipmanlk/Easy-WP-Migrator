@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSetWpDir = new System.Windows.Forms.Button();
             this.txtWpDir = new System.Windows.Forms.TextBox();
@@ -39,6 +40,8 @@
             this.listWpTables = new System.Windows.Forms.ListBox();
             this.btnTestConnection = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtWhMysqlDb = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtWhMysqlPass = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtWhMysqlUser = new System.Windows.Forms.TextBox();
@@ -53,12 +56,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnStartMigration = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.txtWhMysqlDb = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.listLog = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -192,6 +198,25 @@
             this.groupBox3.Text = "Step 2: WebHost Details";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // txtWhMysqlDb
+            // 
+            this.txtWhMysqlDb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWhMysqlDb.Location = new System.Drawing.Point(127, 143);
+            this.txtWhMysqlDb.Name = "txtWhMysqlDb";
+            this.txtWhMysqlDb.Size = new System.Drawing.Size(381, 20);
+            this.txtWhMysqlDb.TabIndex = 23;
+            this.txtWhMysqlDb.Text = "wp_3434343";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(27, 146);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "MySQL Database:";
+            // 
             // txtWhMysqlPass
             // 
             this.txtWhMysqlPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -275,7 +300,7 @@
             this.groupBox4.Controls.Add(this.txtOutputDir);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(12, 461);
+            this.groupBox4.Location = new System.Drawing.Point(12, 440);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(544, 92);
             this.groupBox4.TabIndex = 16;
@@ -285,9 +310,9 @@
             // btnSetOutputDir
             // 
             this.btnSetOutputDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetOutputDir.Location = new System.Drawing.Point(417, 48);
+            this.btnSetOutputDir.Location = new System.Drawing.Point(433, 46);
             this.btnSetOutputDir.Name = "btnSetOutputDir";
-            this.btnSetOutputDir.Size = new System.Drawing.Size(91, 23);
+            this.btnSetOutputDir.Size = new System.Drawing.Size(75, 23);
             this.btnSetOutputDir.TabIndex = 14;
             this.btnSetOutputDir.Text = "Browse";
             this.btnSetOutputDir.UseVisualStyleBackColor = true;
@@ -296,10 +321,10 @@
             // txtOutputDir
             // 
             this.txtOutputDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOutputDir.Location = new System.Drawing.Point(35, 50);
+            this.txtOutputDir.Location = new System.Drawing.Point(35, 48);
             this.txtOutputDir.Name = "txtOutputDir";
             this.txtOutputDir.ReadOnly = true;
-            this.txtOutputDir.Size = new System.Drawing.Size(361, 20);
+            this.txtOutputDir.Size = new System.Drawing.Size(392, 20);
             this.txtOutputDir.TabIndex = 15;
             this.txtOutputDir.Text = "C:\\Users\\ipman\\Desktop";
             // 
@@ -307,7 +332,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(32, 29);
+            this.label7.Location = new System.Drawing.Point(32, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(87, 13);
             this.label7.TabIndex = 14;
@@ -315,44 +340,60 @@
             // 
             // btnStartMigration
             // 
-            this.btnStartMigration.Location = new System.Drawing.Point(394, 558);
+            this.btnStartMigration.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartMigration.Location = new System.Drawing.Point(13, 16);
             this.btnStartMigration.Name = "btnStartMigration";
-            this.btnStartMigration.Size = new System.Drawing.Size(162, 32);
+            this.btnStartMigration.Size = new System.Drawing.Size(144, 44);
             this.btnStartMigration.TabIndex = 14;
             this.btnStartMigration.Text = "Start Migration";
             this.btnStartMigration.UseVisualStyleBackColor = true;
             this.btnStartMigration.Click += new System.EventHandler(this.btnStartMigration_Click);
             // 
-            // txtWhMysqlDb
+            // groupBox5
             // 
-            this.txtWhMysqlDb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWhMysqlDb.Location = new System.Drawing.Point(127, 143);
-            this.txtWhMysqlDb.Name = "txtWhMysqlDb";
-            this.txtWhMysqlDb.Size = new System.Drawing.Size(381, 20);
-            this.txtWhMysqlDb.TabIndex = 23;
-            this.txtWhMysqlDb.Text = "wp_3434343";
+            this.groupBox5.Controls.Add(this.listLog);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(12, 544);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(369, 69);
+            this.groupBox5.TabIndex = 17;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Log";
             // 
-            // label8
+            // groupBox6
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(27, 146);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 13);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "MySQL Database:";
+            this.groupBox6.Controls.Add(this.btnStartMigration);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(387, 544);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(169, 69);
+            this.groupBox6.TabIndex = 18;
+            this.groupBox6.TabStop = false;
+            // 
+            // listLog
+            // 
+            this.listLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listLog.FormattingEnabled = true;
+            this.listLog.Location = new System.Drawing.Point(3, 16);
+            this.listLog.Name = "listLog";
+            this.listLog.Size = new System.Drawing.Size(363, 50);
+            this.listLog.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(571, 606);
-            this.Controls.Add(this.btnStartMigration);
+            this.ClientSize = new System.Drawing.Size(574, 622);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "WPMigrator - Easy Wordpress Migration";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -360,6 +401,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -393,6 +436,9 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.TextBox txtWhMysqlDb;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.ListBox listLog;
     }
 }
 

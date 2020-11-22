@@ -59,5 +59,61 @@ namespace WPMigrator
 
             return wpOptions;
         }
+
+        public static Boolean updateLinks(DBConnection dbCon, string newUrl)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    // get wp options
+                    Dictionary<string, string> wpOptions = WpTools.getWpOptions(dbCon);
+
+                    // replace site url in otpions
+                    MySqlConnection conn = dbCon.GetConnection();
+
+                    string query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='siteurl'", newUrl);
+                    MySqlCommand mysqlCommand = new MySqlCommand(query, conn);
+                    mysqlCommand.ExecuteNonQuery();
+
+                    query = String.Format("UPDATE wp_options SET option_value = '{0}' WHERE option_name='home'", newUrl);
+                    mysqlCommand = new MySqlCommand(query, conn);
+                    mysqlCommand.ExecuteNonQuery();
+
+                    // replace urls in posts (image urls, videos, etc)
+                    query = String.Format("UPDATE wp_posts SET post_content = REPLACE(post_content, '{0}', '{1}')", wpOptions["siteurl"], newUrl);
+                    Console.WriteLine(query);
+                    mysqlCommand = new MySqlCommand(query, conn);
+                    mysqlCommand.ExecuteNonQuery();
+
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            } catch (Exception e)
+            {
+                System.Diagnostics.Trace.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public static Boolean updateConfigFile(string wpConfigPath, Dictionary<string, string> newWpConfig)
+        {
+            try
+            {
+                string configStr = File.ReadAllText(wpConfigPath);
+                configStr = Regex.Replace(configStr, @"define\( 'DB_NAME', '(.*)' \)", String.Format("define( 'DB_NAME', '{0}' )", newWpConfig["DB_NAME"]));
+                configStr = Regex.Replace(configStr, @"define\( 'DB_USER', ', '(.*)' \)", String.Format("define( 'DB_USER', '{0}' )", newWpConfig["DB_USER"]));
+                configStr = Regex.Replace(configStr, @"define\( 'DB_PASSWORD', '(.*)' \)", String.Format("define( 'DB_PASSWORD', '{0}' )", newWpConfig["DB_PASSWORD"]));
+                configStr = Regex.Replace(configStr, @"define\( 'DB_HOST', ', '(.*)' \)", String.Format("define( 'DB_HOST', '{0}' )", newWpConfig["DB_HOST"]));
+                File.WriteAllText(wpConfigPath, configStr);
+                return true;
+            } catch (Exception e)
+            {
+                System.Diagnostics.Trace.WriteLine(e.Message);
+                return false;
+            }
+        }
     }
 }
