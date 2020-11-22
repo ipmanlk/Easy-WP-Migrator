@@ -57,8 +57,8 @@
             this.btnStartMigration = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.listLog = new System.Windows.Forms.ListBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -134,7 +134,6 @@
             this.txtMysqlDir.ReadOnly = true;
             this.txtMysqlDir.Size = new System.Drawing.Size(216, 20);
             this.txtMysqlDir.TabIndex = 15;
-            this.txtMysqlDir.Text = "G:\\Program Files\\xampp\\mysql";
             // 
             // label5
             // 
@@ -205,7 +204,6 @@
             this.txtWhMysqlDb.Name = "txtWhMysqlDb";
             this.txtWhMysqlDb.Size = new System.Drawing.Size(381, 20);
             this.txtWhMysqlDb.TabIndex = 23;
-            this.txtWhMysqlDb.Text = "wp_3434343";
             // 
             // label8
             // 
@@ -225,7 +223,6 @@
             this.txtWhMysqlPass.PasswordChar = '*';
             this.txtWhMysqlPass.Size = new System.Drawing.Size(381, 20);
             this.txtWhMysqlPass.TabIndex = 21;
-            this.txtWhMysqlPass.Text = "fsdfsdfsdsdfs";
             // 
             // label4
             // 
@@ -244,7 +241,6 @@
             this.txtWhMysqlUser.Name = "txtWhMysqlUser";
             this.txtWhMysqlUser.Size = new System.Drawing.Size(381, 20);
             this.txtWhMysqlUser.TabIndex = 19;
-            this.txtWhMysqlUser.Text = "wp122_user1";
             // 
             // label3
             // 
@@ -263,7 +259,6 @@
             this.txtWhMysqlHost.Name = "txtWhMysqlHost";
             this.txtWhMysqlHost.Size = new System.Drawing.Size(381, 20);
             this.txtWhMysqlHost.TabIndex = 17;
-            this.txtWhMysqlHost.Text = "localhost";
             // 
             // label2
             // 
@@ -282,7 +277,6 @@
             this.txtWhDomain.Name = "txtWhDomain";
             this.txtWhDomain.Size = new System.Drawing.Size(381, 20);
             this.txtWhDomain.TabIndex = 15;
-            this.txtWhDomain.Text = "http//www.testsite.com";
             // 
             // label6
             // 
@@ -360,16 +354,6 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Log";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.btnStartMigration);
-            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(387, 544);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(169, 69);
-            this.groupBox6.TabIndex = 18;
-            this.groupBox6.TabStop = false;
-            // 
             // listLog
             // 
             this.listLog.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -379,6 +363,16 @@
             this.listLog.Name = "listLog";
             this.listLog.Size = new System.Drawing.Size(363, 50);
             this.listLog.TabIndex = 1;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnStartMigration);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(387, 544);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(169, 69);
+            this.groupBox6.TabIndex = 18;
+            this.groupBox6.TabStop = false;
             // 
             // Form1
             // 

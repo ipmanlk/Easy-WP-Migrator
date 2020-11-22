@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing;
 
 namespace WPMigrator
 {
@@ -69,7 +70,58 @@ namespace WPMigrator
         {
             listLog.Items.Add("Migration process started.");
 
+            // reset validation colors
+            txtWpDir.BackColor = txtMysqlDir.BackColor = txtWhDomain.BackColor = txtWhMysqlHost.BackColor = txtWhMysqlUser.BackColor = txtWhMysqlPass.BackColor = txtWhMysqlDb.BackColor = Color.White;
+
             // TODO: Validation
+            if (txtWpDir.Text.Trim() == "")
+            {
+                txtWpDir.BackColor = Color.Red;
+                MessageBox.Show("Please select your local WordPress development directory!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (txtMysqlDir.Text.Trim() == "")
+            {
+                txtMysqlDir.BackColor = Color.Red;
+                MessageBox.Show("Please select your MySQL directory!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (txtWhDomain.Text.Trim() == "")
+            {
+                txtWhDomain.BackColor = Color.Red;
+                MessageBox.Show("Please enter your domain name!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (txtWhMysqlHost.Text.Trim() == "")
+            {
+                txtWhMysqlHost.BackColor = Color.Red;
+                MessageBox.Show("Please enter your mysql host!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (txtWhMysqlUser.Text.Trim() == "")
+            {
+                txtWhMysqlUser.BackColor = Color.Red;
+                MessageBox.Show("Please enter your mysql username!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (txtWhMysqlPass.Text.Trim() == "")
+            {
+                txtWhMysqlPass.BackColor = Color.Red;
+                MessageBox.Show("Please enter your mysql user password!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (txtWhMysqlDb.Text.Trim() == "")
+            {
+                txtWhMysqlDb.BackColor = Color.Red;
+                MessageBox.Show("Please enter your mysql database name!.", "Sorry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             // 1: Create a clone of the existing database
             listLog.Items.Add("Creating clone of the database.");
